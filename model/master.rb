@@ -4,7 +4,14 @@ require 'digest/sha1'
 require 'dm-migrations'
 
 # Initialize the Master DB
-DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/master.db")
+# DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/master.db")
+DataMapper.setup(:default, 
+  :adapter  => 'mysql', 
+  :user     => 'serpico', 
+  :password => 'serpico', 
+  :host     => 'database-1.cluster-cgo0kmwhhubx.us-east-1.rds.amazonaws.com', 
+  :database => 'serpico'
+)
 
 class TemplateFindings
   include DataMapper::Resource
@@ -19,13 +26,13 @@ class TemplateFindings
   property :dread_total, Integer, required: false
   property :effort, String, required: false
   property :type, String, required: false, length: 200
-  property :overview, String, length: 20_000, required: false
-  property :poc, String, length: 20_000, required: false
-  property :remediation, String, length: 20_000, required: false
-  property :references, String, length: 20_000, required: false
+  property :overview, Text, length: 20_000, required: false
+  property :poc, Text, length: 20_000, required: false
+  property :remediation, Text, length: 20_000, required: false
+  property :references, Text, length: 20_000, required: false
   property :approved, Boolean, required: false, default: true
   property :risk, Integer, required: false
-  property :affected_hosts, String, length: 20_000, required: false
+  property :affected_hosts, Text, length: 20_000, required: false
 
   # CVSSv2
   property :av, String, required: false
@@ -83,8 +90,8 @@ class TemplateFindings
   # Risk Matrix
   property :severity, String, required: false
   property :likelihood, String, required: false
-  property :severity_rationale, String, length: 20_000, required: false
-  property :likelihood_rationale, String, length: 20_000, required: false
+  property :severity_rationale, Text, length: 20_000, required: false
+  property :likelihood_rationale, Text, length: 20_000, required: false
 
   # NIST800
   property :nist_impact, String, :required => false
@@ -114,16 +121,16 @@ class Findings
   property :effort, String, required: false
   property :type, String, required: false, length: 200
   property :dread_total, Integer, required: false
-  property :overview, String, length: 20_000, required: false
-  property :poc, String, length: 20_000, required: false
-  property :remediation, String, length: 20_000, required: false
-  property :notes, String, length: 1_000_000, required: false
+  property :overview, Text, length: 20_000, required: false
+  property :poc, Text, length: 20_000, required: false
+  property :remediation, Text, length: 20_000, required: false
+  property :notes, Text, length: 1_000_000, required: false
   property :assessment_type, String, required: false
-  property :references, String, length: 20_000, required: false
+  property :references, Text, length: 20_000, required: false
   property :risk, Integer, required: false
-  property :affected_hosts, String, length: 1_000_000, required: false
-  property :presentation_points, String, length: 100_000, required: false
-  property :presentation_rem_points, String, length: 100_000, required: false
+  property :affected_hosts, Text, length: 1_000_000, required: false
+  property :presentation_points, Text, length: 100_000, required: false
+  property :presentation_rem_points, Text, length: 100_000, required: false
 
   # CVSSv2
   property :av, String, required: false
@@ -181,8 +188,8 @@ class Findings
   # Risk Matrix
   property :severity, String, required: false
   property :likelihood, String, required: false
-  property :severity_rationale, String, length: 20_000, required: false
-  property :likelihood_rationale, String, length: 20_000, required: false
+  property :severity_rationale, Text, length: 20_000, required: false
+  property :likelihood_rationale, Text, length: 20_000, required: false
 
   # NIST800
   property :nist_impact, String, :required => false
