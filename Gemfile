@@ -8,6 +8,7 @@ gem 'rubyzip'
 gem 'net-ldap', '~> 0.11'
 gem 'json'
 gem 'nokogiri'
+# sudo apt-get install libmysqlclient-dev
 gem 'do_mysql'
 gem 'do_sqlite3', '0.10.17'
 gem 'data_mapper', '1.2.0'
