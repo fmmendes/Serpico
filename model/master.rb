@@ -7,9 +7,9 @@ require 'dm-migrations'
 # DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/master.db")
 DataMapper.setup(:default, 
   :adapter  => 'mysql', 
-  :user     => 'serpico', 
-  :password => 'serpico', 
-  :host     => 'database-1.cluster-cgo0kmwhhubx.us-east-1.rds.amazonaws.com', 
+  :user     => ENV["DB_USER"], 
+  :password => ENV["DB_PASS"], 
+  :host     => ENV["DB_HOST"], 
   :database => 'serpico'
 )
 
